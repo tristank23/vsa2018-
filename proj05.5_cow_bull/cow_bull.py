@@ -24,6 +24,9 @@
 import random
 number = str(random.randint(1000,9999)) #random 4 digit number
 print "Welcome to the cows and bulls game!"
+lst = []
+for letter in number:
+    lst.append(letter)
 
 user_num = 0
 cows = 0
@@ -31,9 +34,8 @@ bulls = 0
 
 while number != user_num:
     user_num = raw_input("Guess a 4-digit number or type exit to leave: ")
-    user_num = int(user_num)
-    for i in number:
-        for k in user_num:
-            if i == k:
-                cows = cows + 1
+    user_lst = []
+    for item in user_num:
+        user_list.append(item)
+
                 
