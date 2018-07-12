@@ -55,13 +55,12 @@ print "Welcome to the game Hangman!"
 print "I am thinking of a word that is", len(word), "letters long"
 var = string.lowercase
 
-guesses = 8
+guesses = 18 - len(word)
 guess_list = []
 for item in list:
     guess_list.append(" _ ")
 counter = 0
-end = 0
-while end == 0:
+while True:
     if guesses == 0:
         break
     elif guess_list == list:
