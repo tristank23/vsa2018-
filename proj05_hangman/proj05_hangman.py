@@ -48,7 +48,6 @@ wordlist = load_words()
 # your code begins here!
 
 word = choose_word(wordlist)
-print word
 list = []
 for letter in word:
     list.append(letter)
@@ -59,31 +58,41 @@ var = string.lowercase
 guesses = 8
 guess_list = []
 for item in list:
-    guess_list.append("_")
+    guess_list.append(" _ ")
 counter = 0
-while True:
+end = 0
+while end == 0:
+    if guesses == 0:
+        break
+    elif guess_list == list:
+        break
     print "Available letters: " + ''.join(var)
     print "You have ", guesses, " guesses left"
     user_guess = raw_input("Please guess a letter: ")
-    answer = False
-
+    answer = 0
+    counter = 0
     for item in list:
-        counter = 0
         if user_guess == item:
             guess_list[counter] = user_guess
             var = var.replace(user_guess, "")
-            answer = True
+            answer = 1
 
         elif user_guess != item:
-            guesses = guesses - 1
             var = var.replace(user_guess, "")
-        elif guess_list == list:
-            print "Congrats you won!!!"
         counter = counter + 1
-    if answer == True:
+
+    if answer == 1:
         print "Good guess: " + ''.join(guess_list)
-    elif answer == False:
+
+    elif answer == 0:
         print "Oops! That letter is not in my word: " + ''.join(guess_list)
+        guesses = guesses - 1
+
+if guesses == 0:
+    print "Game over, you ran out of guesses. The word was " + word
+else:
+    print "Congratulations, you won!"
+
 
 
 
