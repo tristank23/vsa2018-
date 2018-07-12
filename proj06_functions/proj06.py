@@ -3,6 +3,16 @@
 
 # proj05: functions and lists
 
+# def adder(x,y):
+#     z = x + y
+#     return z
+#
+# #call a function
+# print adder(3,5)
+
+
+
+
 # Part I
 
 def divisors(num):
@@ -13,7 +23,13 @@ def divisors(num):
     """
 
     # Fill in the function and change the return statment.
-    return 0
+
+#     lst = []
+#     for item in range(1, num + 1):
+#         if num % item == 0:
+#             lst.append(item)
+#     return lst
+# print divisors(8)
 
 def prime(num):
     """
@@ -23,7 +39,21 @@ def prime(num):
     """
 
     # Fill in the function and change the return statment.
-    return False
+
+#     prime_lst = [1, num]
+#     lst = []
+#     for item in range(1, num + 1):
+#         if num % item == 0:
+#             lst.append(item)
+#     if lst == prime_lst:
+#         return True
+#     else:
+#         return False
+# print prime(5)
+
+
+
+
 
 
 # Part II:
@@ -38,7 +68,12 @@ def prime(num):
 #
 # Hint: Use a for loop and with an append function: list.append(letter)
 #
-# sentence_string = "Hello, my name is Monty Python."
+sentence_string = "Hello, my name is Monty Python."
+sentence_list = []
+for letter in sentence_string:
+    sentence_list.append(letter)
+print sentence_list
+
 
 
 
@@ -56,6 +91,9 @@ def prime(num):
 # y
 #  .... keeps going on from here.
 
+for item in sentence_list:
+    print item
+
 
 
 
@@ -63,12 +101,27 @@ def prime(num):
 # letter is 'b', print out the index of the current letter (should print out the
 # number 1).
 #
-# vowels = ['a', 'b', 'i', 'o', 'u', 'y']
+vowels = ['a', 'b', 'i', 'o', 'u', 'y']
+
+counter = 0
+for item in vowels:
+    if item == 'b':
+        print counter
+    counter = counter + 1
 
 
 
 
 # 4: use the index found to change the list vowels so that the b is replaced with an e.
+
+counter = 0
+for item in vowels:
+    if item == 'b':
+        vowels[counter] = 'e'
+    counter = counter + 1
+print vowels
+
+
 
 
 
@@ -76,6 +129,12 @@ def prime(num):
 #  number is in the vowels list. If the letter is in the vowels list, add one to a
 # counter. Print out the counter at the end of the loop. This counter should show how
 # many vowels are in sentence_string.
+
+counter1 = 0
+for letter in sentence_string:
+    if letter in vowels:
+        counter1 = counter1 +  1
+print counter1
 
 
 
@@ -89,5 +148,12 @@ def prime(num):
 
 # ['a', 'e', 'i', 'o', 'y']
 
-def vowelFinder(sentence_list, vowels):
-    return []
+def vowel_finder(sentence_list, vowels):
+    vowel_list = []
+    for item in sentence_list:
+        if item in vowels:
+            if item not in vowel_list:
+                vowel_list.append(item)
+    return vowel_list
+vowelList = vowel_finder(sentence_list, vowels)
+print vowelList
