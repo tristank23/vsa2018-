@@ -1,20 +1,28 @@
 import time
-start_time = time.time()
-
-list1 = [5, 6, 2, 23, 4]
-sorted_list = []
-
-while len(list1) > 0:
-
-    lowest = min(list1)
-
-    index = list1.index(lowest)
-
-    sorted_list.append(lowest)
-
-    del list1[index]
+import random
+total_time = 0
 
 
-print sorted_list
+for i in range(100):
 
-print "--- %s seconds ---" % (time.time() - start_time)
+    start_time = time.clock()
+
+    list_len = 1000
+    list1 = []
+    for i in range(list_len):
+
+        list1.append(random.randint(0, 100))
+
+    sorted_list = []
+
+    while len(list1) > 0:
+
+        lowest = min(list1)
+        index = list1.index(lowest)
+        sorted_list.append(lowest)
+        del list1[index]
+    total_time += (time.clock() - start_time)
+print total_time / 100
+
+
+
