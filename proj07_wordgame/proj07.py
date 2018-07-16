@@ -123,7 +123,10 @@ def display_hand(hand):
     The order of the letters is unimportant.
 
     hand: dictionary (string -> int)
+
     """
+    print "Current Hand:",
+
     for letter in hand.keys():
         for j in range(hand[letter]):
              print letter,              # print all on the same line
@@ -197,16 +200,17 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     """
     # TO DO...
+    hand2 = hand.copy()
     valid_word = True
     if word not in word_list:
         valid_word = False
     for letter in word:
-        if letter not in hand:
+        if letter not in hand2:
             valid_word = False
-        elif hand[letter] == 0:
+        elif hand2[letter] == 0:
             valid_word = False
         else:
-            hand[letter] = hand[letter] - 1
+            hand2[letter] = hand2[letter] - 1
     return valid_word
 
 
@@ -249,12 +253,24 @@ def play_hand(hand, word_list):
       
     """
     # TO DO ...
-    print "Current Hand: ", display_hand(hand)
-    word = raw_input("Enter a word, or a '.' to indicate that you are finished: ")
-    value = get_word_score(word, n)
     total = 0
-    total = total + value
-    print word + " earned ", value, "points. Total:", total, "points"
+    while True:
+        display_hand(hand)
+        word = raw_input("Enter a word, or a '.' to indicate that you are finished: ")
+        if word == '.':
+            print "Total score: ", total, "points"
+            break
+        valid_word = is_valid_word(word, hand, word_list)
+        if valid_word == False:
+            print "Invalid word, please try again"
+        elif valid_word == True:
+            value = get_word_score(word, n)
+            total = total + value
+            print word + " earned ", value, "points. Total:", total, "points"
+            hand = update_hand(hand, word)
+
+
+
 
 
 #
@@ -278,6 +294,24 @@ def play_game(word_list):
     """
     # TO DO...
     while True:
+        game = raw_input("Would you like to play again? type 'n' for a new hand. type 'r' to use the last hand again. type 'e' to exit the game: ")
+        if game == 'n':
+            hand = deal_hand(HAND_SIZE)
+            play_hand(hand, word_list)
+        elif game == 'r':
+            play_hand(hand3, word_list)
+        elif game == 'e':
+            print "Thanks for playing."
+            break
+
+
+
+
+
+
+
+
+
         
 
 #
@@ -285,6 +319,8 @@ def play_game(word_list):
 #
 if __name__ == '__main__':
     word_list = load_words()
-    hand1 = deal_hand(HAND_SIZE)
-    print hand1
-    play_hand(hand1, word_list)
+    hand = deal_hand(HAND_SIZE)
+    hand3 = hand.copy()
+
+    play_hand(hand, word_list)
+    play_game(word_list)
