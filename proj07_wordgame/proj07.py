@@ -1,6 +1,28 @@
 # Name:
 # Date:
 
+#define a dictionary
+
+# #empty
+# dict1 = {}
+# dict2 = {'item1' : 1, 'item2' : 3}
+#
+# print dict1
+# print dict2
+#
+# #add something to a dictionary
+# dict1['today'] = "monday"
+# print dict1
+#
+# #get someting (value)
+# print dict1['today']
+#
+# #get something safely (value)
+# print dict1.get("tomorrow", 0)
+#
+# for item in dict2:
+#     print item, dict2[item]
+
 # proj07: Word Game
 
 import random
@@ -9,6 +31,7 @@ import string
 VOWELS = 'aeiou'
 CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
 HAND_SIZE = 7
+n = HAND_SIZE
 
 SCRABBLE_LETTER_VALUES = {
     'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2, 'h': 4, 'i': 1, 'j': 8, 'k':
@@ -81,6 +104,14 @@ def get_word_score(word, n):
 #
 # Make sure you understand how this function works and what it does!
 #
+    value = 0
+    for letter in word:
+        value = value + SCRABBLE_LETTER_VALUES[letter]
+    value = value * len(word)
+    if len(word) == n:
+        value = value + 50
+    return value
+
 def display_hand(hand):
     """
     Displays the letters currently in the hand.
@@ -146,6 +177,11 @@ def update_hand(hand, word):
     returns: dictionary (string -> int)
     """
     # TO DO ...
+    for item in word:
+       if item in hand:
+           hand[item] = hand[item] -1
+    return hand
+
 
 #
 # Problem #3: Test word validity
@@ -161,6 +197,18 @@ def is_valid_word(word, hand, word_list):
     word_list: list of lowercase strings
     """
     # TO DO...
+    valid_word = True
+    if word not in word_list:
+        valid_word = False
+    for letter in word:
+        if letter not in hand:
+            valid_word = False
+        elif hand[letter] == 0:
+            valid_word = False
+        else:
+            hand[letter] = hand[letter] - 1
+    return valid_word
+
 
 def calculate_handlen(hand):
     handlen = 0
@@ -177,6 +225,7 @@ def play_hand(hand, word_list):
     Allows the user to play the given hand, as follows:
 
     * The hand is displayed.
+
     
     * The user may input a word.
 
@@ -200,6 +249,13 @@ def play_hand(hand, word_list):
       
     """
     # TO DO ...
+    print "Current Hand: ", display_hand(hand)
+    word = raw_input("Enter a word, or a '.' to indicate that you are finished: ")
+    value = get_word_score(word, n)
+    total = 0
+    total = total + value
+    print word + " earned ", value, "points. Total:", total, "points"
+
 
 #
 # Problem #5: Playing a game
@@ -221,10 +277,14 @@ def play_game(word_list):
     * If the user inputs anything else, ask them again.
     """
     # TO DO...
+    while True:
+        
 
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     word_list = load_words()
-    play_game(word_list)
+    hand1 = deal_hand(HAND_SIZE)
+    print hand1
+    play_hand(hand1, word_list)
