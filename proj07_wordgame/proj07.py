@@ -259,14 +259,17 @@ def play_hand(hand, word_list):
         word = raw_input("Enter a word, or a '.' to indicate that you are finished: ")
         if word == '.':
             print "Total score: ", total, "points"
+            print
             break
         valid_word = is_valid_word(word, hand, word_list)
         if valid_word == False:
             print "Invalid word, please try again"
+            print
         elif valid_word == True:
             value = get_word_score(word, n)
             total = total + value
             print word + " earned ", value, "points. Total:", total, "points"
+            print
             hand = update_hand(hand, word)
 
 
@@ -295,6 +298,7 @@ def play_game(word_list):
     # TO DO...
     while True:
         game = raw_input("Would you like to play again? type 'n' for a new hand. type 'r' to use the last hand again. type 'e' to exit the game: ")
+        print
         if game == 'n':
             hand = deal_hand(HAND_SIZE)
             play_hand(hand, word_list)
