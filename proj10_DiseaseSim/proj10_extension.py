@@ -5,10 +5,10 @@
 
 
 
-import numpy
+# import numpy
 import random
-import pylab
-from proj10 import *
+# import pylab
+from proj10 import
 
 #
 # PROBLEM 1
@@ -20,6 +20,10 @@ class ResistantVirus(SimpleVirus):
     """      
 
     def __init__(self, maxBirthProb, clearProb, resistances, mutProb):
+        self.maxBirthProb = maxBirthProb
+        self.clearProb = clearProb
+        self.resistances = resistances
+        self.mutProb = mutProb
 
         """
 
@@ -45,6 +49,12 @@ class ResistantVirus(SimpleVirus):
 
 
     def isResistantTo(self, drug):
+        try:
+            return self.resistances[drug]
+        except:
+            pass
+
+
 
         """
         Get the state of this virus particle's resistance to a drug. This method
@@ -60,6 +70,22 @@ class ResistantVirus(SimpleVirus):
 
 
     def reproduce(self, popDensity, activeDrugs):
+        for item in activeDrugs:
+            if self.isResistantTo(item):
+                if random.random() < self.maxBirthProb * (1 - popDensity):
+                    x = True
+                else:
+                    x = False
+            else:
+                x = False
+            if x:
+                return ResistantVirus(self.maxBirthProb, self.clearProb, self.resistances, self.maxBirthProb)
+            else:
+                raise NotImplemented
+
+
+
+
 
         """
         Stochastically determines whether this virus particle reproduces at a
@@ -111,6 +137,8 @@ class Patient(SimplePatient):
     """
 
     def __init__(self, viruses, maxPop):
+        self.viruses = viruses
+        self.maxPop = maxPop
         """
         Initialization function, saves the viruses and maxPop parameters as
         attributes. Also initializes the list of drugs being administered
@@ -125,6 +153,8 @@ class Patient(SimplePatient):
     
 
     def addPrescription(self, newDrug):
+        if newDrug not in postcondition:
+            postcondition.append(newDrug)
 
         """
         Administer a drug to this patient. After a prescription is added, the 
@@ -151,6 +181,9 @@ class Patient(SimplePatient):
         
 
     def getResistPop(self, drugResist):
+        counter = 0
+        for item in drugResist:
+
         """
         Get the population of virus particles resistant to the drugs listed in 
         drugResist.        
