@@ -2,9 +2,10 @@
 # Name:
 # Date:
 
-import numpy
+# import numpy
 import random
-import pylab
+# import pylab
+
 
 ''' 
 Begin helper code
@@ -34,6 +35,9 @@ class SimpleVirus(object):
     """
 
     def __init__(self, maxBirthProb, clearProb):
+        self.maxBirthProb = maxBirthProb
+        self.clearProb = clearProb
+
         """
         Initialize a SimpleVirus instance, saves all parameters as attributes
         of the instance.        
@@ -44,6 +48,12 @@ class SimpleVirus(object):
         # TODO
 
     def doesClear(self):
+        if random.random() < self.clearProb:
+            return True
+        else:
+            return False
+
+
         """ Stochastically determines whether this virus particle is cleared from the
         patient's body at a time step. 
         returns: True with probability self.clearProb and otherwise returns
@@ -53,6 +63,15 @@ class SimpleVirus(object):
         # TODO
 
     def reproduce(self, popDensity):
+        if random.random() < self.maxBirthProb * (1-popDensity):
+            x = True
+        else:
+            x = False
+        if x:
+            return SimpleVirus(self.maxBirthProb, self.clearProb)
+        else:
+            raise NoChildException
+
         """
         Stochastically determines whether this virus particle reproduces at a
         time step. Called by the update() method in the SimplePatient and
@@ -82,6 +101,8 @@ class SimplePatient(object):
     """
 
     def __init__(self, viruses, maxPop):
+        self.viruses = viruses
+        self.maxPop = maxPop
         """
 
         Initialization function, saves the viruses and maxPop parameters as
@@ -96,14 +117,34 @@ class SimplePatient(object):
         # TODO
 
     def getTotalPop(self):
-        """
-        Gets the current total virus population. 
-        returns: The total virus population (an integer)
-        """
+        return len(self.viruses)
+        # """
+        # Gets the current total virus population.
+        # returns: The total virus population (an integer)
+        # """
 
         # TODO
 
     def update(self):
+        for item in self.viruses:
+            if item.doesClear():
+                self.viruses.remove(item)
+            else:
+                x = self.getTotalPop() / self.maxPop
+                try:
+                    self.viruses.append(item.reproduce(x))
+
+                except NoChildException:
+                    continue
+        return self.getTotalPop()
+
+
+
+
+
+
+
+
         """
         Update the state of the virus population in this patient for a single
         time step. update() should execute the following steps in this order:
@@ -126,6 +167,22 @@ class SimplePatient(object):
 # PROBLEM 2
 #
 def simulationWithoutDrug():
+    lst = []
+    lst2 = []
+    lst3 = []
+    counter = 1
+    for i in range(1, 101):
+        lst.append(SimpleVirus(0.1, 0.05))
+    patient = SimplePatient(lst, 1000)
+    for i in range(1, 301):
+        lst2.append(patient.update())
+        lst3.append(counter)
+        counter = counter + 1
+    print lst2
+    print lst3
+
+
+
     """
     Run the simulation and plot the graph for problem 2 (no drugs are used,
     viruses do not have any drug resistance).    
@@ -134,3 +191,4 @@ def simulationWithoutDrug():
     """
 
     # TODO
+simulationWithoutDrug()
