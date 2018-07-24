@@ -1,7 +1,9 @@
 # proj11: Recursion Programming Lab
 
-# Name:
-# Date:
+# Name: Tristan Karnes
+# Date: July 24 2018
+
+
 
 # Tests are created for you in proj11_test.py. Uncomment tests as you need them.
 # Otherwise, you could call a function that you haven't defined yet, and you would get an error.
@@ -11,13 +13,37 @@
 # Pre: lst is an list of 'size' integers, size is nonnegative
 # Post: the sum of lst[0]...lst[size-1] is returned
 # Challenge: This function could be done by dividing the list in half and performing recursive calls on each half (as opposed to just shrinking the size by one each time).
-
+def sumList(lst):
+    if len(lst) == 0:
+        return 0
+    elif len(lst) == 1:
+        return lst[0]
+    elif len(lst) > 1:
+        number = lst[0] + lst[-1]
+        lst.remove(lst[0])
+        lst.remove(lst[-1])
+        lst.append(number)
+        return sumList(lst)
 
 
 # member(target, set);
 # Task: determine if target is in the set
 # Pre: set is an list of 'size' integers, size is nonnegative
 # Post: true is returned if target is in the set, else false; the set is unchanged
+
+def member(target, set):
+    if len(set) == 0:
+        return False
+    elif len(set) == 1:
+        if set[0] == target:
+            return True
+        else:
+            return False
+    else:
+        if set[0] == target:
+            return True
+        else:
+            return member(target, set[1:])
 
 
 
@@ -29,6 +55,14 @@
 # addStar("hello") --> "h*e*l*l*o"
 # addStar("abc") --> "a*b*c"
 # addStar("ab") --> "a*b"
+def addStar(str):
+    if len(str) == 0:
+        return str
+    elif len(str) == 1:
+        return str
+    else:
+        temp = str[0] + '*'
+        return temp + addStar(str[1:])
 
 
 
@@ -37,6 +71,13 @@
 # Pre: n is a positive integer
 # Post: the sum of the first n harmonic terms is returned.
 # The harmonic series is 1 + (1/2) + (1/3) + (1/4) + ...
+def harmonicSum(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return n
+    else:
+        return 1.0 / n + harmonicSum(n - 1)
 
 
 
@@ -47,7 +88,17 @@
 # The test is case insensitive (user .upper() & .lower()).
 # You do not need to worry about trimming blanks from the ends of the string.
 # Note: the empty string is a palindrome
-
+def isPalindrome(str):
+    str = str[0:].lower()
+    for letter in str:
+        if letter == ' ':
+            str = str.replace(' ', '')
+    if len(str) <= 1:
+        return True
+    elif str[0] != str[-1]:
+        return False
+    else:
+        return isPalindrome(str[1:-1])
 
 
 # replace(target, replacement, numbers, size);
@@ -55,7 +106,21 @@
 # Pre: 'numbers' is an list of 'size' integers, size is nonnegative
 # Post: all occurrences of 'target' in 'numbers' have been replaced  with 'replacement';
 # the number of replacements performed is returned to the caller.
+def replace(target, replacement, numbers, size):
+    size = size - 1
+    if size == -1:
+        counter = 0
+        for item in numbers:
+            if item == replacement:
+                counter += 1
+        return counter
+    elif numbers[size] == target:
+        numbers[size] = replacement
+    return replace(target, replacement, numbers, size)
 
+
+
+                
 
 
 # g_c_d(x, y);
@@ -69,6 +134,14 @@
 # The last nonzero remainder is the greatest common divisor of a and b.
 # Pre: the parameters x & y are nonnegative
 # Post: the GCD of x & y is returned
+def g_c_d(x, y):
+    if y == 0:
+        return x
+    q = x / y
+    r = x % y
+    x = y*q + r
+    return g_c_d(y, r)
+
 
 
 
@@ -76,8 +149,16 @@
 # Task: reverse the contents of lst[first]...lst[last]
 # Pre: 'lst' is a list of at least 'last'+1 integers, first & last are nonnegative
 # Post: the elements lst[first]...lst[last]have been reversed.
-
-
+def reverseLst(lst, first, last):
+    if len(lst) == 0:
+        return lst
+    elif len(lst) == 1:
+        return lst
+    else:
+        temp = int(lst[first].copy())
+        lst[first] = lst[last]
+        lst[last] = temp
+        return reverseLst(lst, lst[first] + 1, lst[last] - 1)
 
 # convert2Binary(num);
 # Task: produce the binary representation of a decimal number
@@ -117,11 +198,11 @@
 # Post: the list elements in the segment a[lb..ub] have been set to value
 # Challenge: This function must be done by dividing the list segment in half and performing recursive calls on each half (as opposed to just shrinking the array bound by one each time)
 
-"""
-Extensions:
-Here are some more to try on your own! These do not come with tests...
-How would you write tests for these functions?
-"""
+    """
+    Extensions:
+    Here are some more to try on your own! These do not come with tests...
+    How would you write tests for these functions?
+    """
 
 # binomialCoeff (n, r);
 # Task: Compute the Binomial Coefficient using Pascal's Triangle.
