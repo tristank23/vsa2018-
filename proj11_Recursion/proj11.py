@@ -150,15 +150,17 @@ def g_c_d(x, y):
 # Pre: 'lst' is a list of at least 'last'+1 integers, first & last are nonnegative
 # Post: the elements lst[first]...lst[last]have been reversed.
 def reverseLst(lst, first, last):
-    if len(lst) == 0:
+    first = int(first)
+    last = int(last)
+    if lst == []:
         return lst
-    elif len(lst) == 1:
+    elif first == last or last < first:
         return lst
     else:
-        temp = int(lst[first].copy())
+        temp = lst[first]
         lst[first] = lst[last]
         lst[last] = temp
-        return reverseLst(lst, lst[first] + 1, lst[last] - 1)
+        return reverseLst(lst, first + 1, last - 1)
 
 # convert2Binary(num);
 # Task: produce the binary representation of a decimal number
@@ -169,6 +171,15 @@ def reverseLst(lst, first, last):
 # The process stops when num is either zero or one.
 # Pre: num is a nonnegative integer
 # Post: the binary representation of num is produced and returned as a string.
+def convert2Binary(num):
+    if  num == 0 or num == 1:
+        return str(num)
+
+
+    q = int(num) / 2
+    r = int(num) % 2
+    r = str(r)
+    return convert2Binary(q) + r
 
 
 
@@ -188,6 +199,16 @@ def reverseLst(lst, first, last):
 # **
 # ***
 # ****
+def printPattern(num):
+    if num == 1:
+        print '*'
+    else:
+        print '*' * num
+        printPattern(num-1)
+        print '*' * num
+
+
+
 
 
 
@@ -197,7 +218,14 @@ def reverseLst(lst, first, last):
 # Pre: lb and ub are valid indices into the list a [the actual size of the lst is unknown]
 # Post: the list elements in the segment a[lb..ub] have been set to value
 # Challenge: This function must be done by dividing the list segment in half and performing recursive calls on each half (as opposed to just shrinking the array bound by one each time)
-
+def lstInitialize(lst, value, lb, ub):
+    if lst[lb] != value:
+        lst[lb] = value
+    if int(lb) == int(ub):
+        return lst
+    if lst[ub] != value:
+        lst[ub] = value
+    return lstInitialize(lst, value, lb + 1, ub)
     """
     Extensions:
     Here are some more to try on your own! These do not come with tests...
