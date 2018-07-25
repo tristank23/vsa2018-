@@ -103,7 +103,20 @@ def get_fable_string():
 # Problem 1: Encryption
 #
 def build_coder(shift):
-    """
+    alpha = string.lowercase + ' '
+    alpha_lst = []
+    for item in alpha:
+        alpha_lst.append(item)
+    coder = {}
+    for item in alpha_lst:
+        
+        index = alpha_lst.index(item)
+        coder[item] = alpha_lst[index + shift]
+build_coder(4)
+
+
+
+"""
     Returns a dict that can apply a Caesar cipher to a letter.
     The cipher is defined by the shift value. Ignores non-letter characters
     like punctuation and numbers.
