@@ -109,10 +109,25 @@ def build_coder(shift):
         alpha_lst.append(item)
     coder = {}
     for item in alpha_lst:
-        
         index = alpha_lst.index(item)
-        coder[item] = alpha_lst[index + shift]
-build_coder(4)
+        if index + shift > 26:
+            coder[item] = alpha_lst[index + shift - 27]
+        else:
+            coder[item] = alpha_lst[index + shift]
+    alpha2 = string.uppercase + ' '
+    alpha_lst2 = []
+    for item in alpha2:
+        alpha_lst2.append(item)
+    for item in alpha_lst2:
+        index2 = alpha_lst2.index(item)
+        if index2 + shift > 26:
+            coder[item] = alpha_lst2[index2 + shift - 27]
+        else:
+            coder[item] = alpha_lst2[index2 + shift]
+    return coder
+
+
+
 
 
 
@@ -139,6 +154,7 @@ build_coder(4)
     ### TODO.
 
 def build_encoder(shift):
+
     """
     Returns a dict that can be used to encode a plain text. For example, you
     could encrypt the plain text by calling the following commands
@@ -165,7 +181,7 @@ def build_encoder(shift):
 
     HINT : Use build_coder.
     """
-    ### TODO.
+    return build_coder(shift)
 
 def build_decoder(shift):
     """
@@ -195,10 +211,14 @@ def build_decoder(shift):
 
     HINT : Use build_coder.
     """
-    ### TODO.
- 
+    coder = build_coder(shift)
+    inv_coder = {v: k for k, v in coder.iteritems()}
+    return inv_coder
 
-def apply_coder(text, coder):
+
+
+
+def apply_coder(t, coder):
     """
     Applies the coder to the text. Returns the encoded text.
 
@@ -212,8 +232,15 @@ def apply_coder(text, coder):
     >>> apply_coder("Khoor,czruog!", build_decoder(3))
     'Hello, world!'
     """
-    ### TODO.
-  
+    text =[]
+    for letter in t:
+        text.append(letter)
+    for number in range(len(text)):
+        if text[number] in coder:
+            text[number] = coder[text[number]]
+    ans = ''.join(text)
+    return ans
+
 
 def apply_shift(text, shift):
     """
@@ -232,7 +259,9 @@ def apply_shift(text, shift):
     >>> apply_shift('This is a test.', 8)
     'Apq hq hiham a.'
     """
-    ### TODO.
+    coder = build_coder(shift)
+    return apply_coder(text, coder)
+
    
 #
 # Problem 2: Codebreaking.
