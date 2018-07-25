@@ -1,14 +1,18 @@
-## proj11: Tests
-
+# ## proj11: Tests
+#
 from proj11 import *
+
 from fractions import gcd
-
-## Uncomment tests as you need them!
-
-"""
-########### sumList ############### 
-
+#
+# ## Uncomment tests as you need them!
+#
+#
+# ########## sumList ###############
+#
 def sumList_test(lst):
+    # print lst
+    # print sumList(lst)
+    # print sum(lst)
     if sumList(lst) == sum(lst):
         return True
 
@@ -23,8 +27,8 @@ for lst in lists:
 
 if sumList_pass:
     print "sumList PASS\n"
-
-########### member ############### 
+#
+# ########### member ###############
 
 member_pass = True
 
@@ -51,8 +55,8 @@ if true_sets != [[1], [1, 2], [2, 3, 4, 1, 2], [2, 1, 3, 4], [2, 1]] or \
 
 if member_pass:
     print "member PASS\n"
-
-########### addStar ############### 
+#
+# ########### addStar ###############
 
 # addStar("hello") --> "h*e*l*l*o"
 # addStar("abc") --> "a*b*c"
@@ -72,9 +76,9 @@ for key in strs:
 
 if strs_pass:
     print "addStar PASS\n"
-
-
-########### harmonicSum ############### 
+#
+#
+# ########### harmonicSum ###############
 
 hs_pass = True
 val = 0
@@ -92,10 +96,10 @@ for num in range (10):
 
 if hs_pass:
     print "harmonicSum PASS\n"
-
-
-########### isPalindrome ############### 
-
+#
+#
+# ########### isPalindrome ###############
+#
 pal_pass = True
 
 true_list = ["raceCaR", "aManaPlanaCanalPanama", "a Man a Plan a Canal Panama", "abccba"]
@@ -115,9 +119,9 @@ for word in false_list:
 
 if pal_pass:
     print "isPalindrome PASS\n"
-
-########### replace ############### 
-
+#
+# ########### replace ###############
+#
 rep_pass = True
 
 orig1 = [[0], [1], [0, 1], [1, 0], [1, 1, 0], [1, 0, 1], [1, 0, 1, 0], [0, 1, 1, 1]]
@@ -131,14 +135,14 @@ for num in range(len(orig1)):
         print orig2[num]
         rep_pass = False
     elif count != ans[num].count(4):
-        print "replace failed to return corrent count of replaced numbers"
+        print "replace failed to return current count of replaced numbers"
         rep_pass = False
 
 if rep_pass:
     print "replace PASS\n"
-
-
-########### g_c_d ############### 
+#
+#
+# ########### g_c_d ###############
 
 gcd_pass = True
 gcd_pairs = [[1, 0], [2, 8], [9, 3], [54, 17], [12, 48], [18, 50], [19, 21]]
@@ -153,8 +157,8 @@ for pair in gcd_pairs:
 
 if gcd_pass:
     print "g_c_d PASS\n"
-
-########### reverseLst ############### 
+#
+# ########### reverseLst ###############
 
 reverse_pass = True
 rev_lsts = [[], ['a'], ['a', 'b'], ['a', 'b', 'c'], ['a', 'b', 'c', 'd']]
@@ -191,9 +195,9 @@ if lst != ['a', 'b', 'e', 'd', 'c', 'f', 'g']:
 
 if reverse_pass:
     print "reverseLst PASS\n"
-
-########### convert2Binary ############### 
-
+#
+# ########### convert2Binary ###############
+#
 bin_pass = True
 
 ans = [0, 1, 10, 11, 100, 101, 110, 111, 1000, 1001, 1010, 1011, 1100, 1101, 1110,
@@ -206,10 +210,10 @@ for num in range(26):
 
 if bin_pass:
     print "convert2Binary PASS\n"
-
-
-########### printPattern ###############
-
+#
+#
+# ########### printPattern ###############
+#
 print "Your pattern should match the exemplar.\n"
 
 print "Exemplar:"
@@ -224,8 +228,8 @@ print "****\n"
 print "Your pattern:"
 printPattern(4)
 print ""
-
-########### lstInitialize ###############
+#
+# ########### lstInitialize ###############
 
 initialize_pass = True
 
@@ -258,7 +262,7 @@ if lst3 != ["a", 7, 7, 7, 7, 7, "c", "d", "a", "b", "c", "d"]:
 
 if initialize_pass:
     print "lstInitialize PASS\n"
-
-"""
-
-## Add any tests you need for extension functions here!
+#
+# """
+#
+# ## Add any tests you need for extension functions here!
