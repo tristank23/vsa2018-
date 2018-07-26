@@ -282,7 +282,18 @@ def find_best_shift(wordlist, text):
     >>> apply_coder(s, build_decoder(8)) returns
     'Hello, world!'
     """
-    ### TODO
+    for i in range(0, 28):
+        s = apply_coder(text, build_decoder(i))
+        for item in string.punctuation:
+            s = s.replace(item, " ")
+        s = s.split(" ")
+        for item in s:
+            if item in wordlist:
+                return i
+
+
+
+
    
 #
 # Problem 3: Multi-level encryption.
@@ -302,9 +313,20 @@ def apply_shifts(text, shifts):
     Example:
     >>> apply_shifts("Do Androids Dream of Electric Sheep?", [(0,6), (3, 18), (12, 16)])
     'JufYkaolfapxQdrnzmasmRyrpfdvpmEurrb?'
-    """
-    ### TODO.
- 
+    # """
+    s = ' '
+    t = ' '
+    for item in range(len(shifts)):
+        s = apply_coder(text[shifts[item][0]: -1], build_encoder(shifts[item][1]))
+        t = t + apply_coder(text[shifts[item][0]: shifts[shifts[item] + 1]], build_encoder(shifts[item][1]))
+        text = s[shifts[item][1]:]
+
+    print s
+    return s
+
+
+
+apply_shifts("Do Androids Dream of Electric Sheep?", [(0,6), (3, 18), (12, 16)])
 #
 # Problem 4: Multi-level decryption.
 #
